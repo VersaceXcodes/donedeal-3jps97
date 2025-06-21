@@ -9,7 +9,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000
 const UV_EmailVerificationNotice: React.FC = () => {
   // Pull the raw email from global state
   const email = useAppStore(state => state.auth.user?.email ?? '');
-  const addToast = useAppStore(state => state.add_toast);
+  const addToast = useAppStore(state => state.addToast);
 
   // Masked email for display
   const [maskedEmail, setMaskedEmail] = useState<string>('');
@@ -92,6 +92,7 @@ const UV_EmailVerificationNotice: React.FC = () => {
           <button
             onClick={handleResend}
             disabled={!canResend || mutation.isLoading}
+            aria-disabled={!canResend || mutation.isLoading}
             className={`ml-2 text-blue-600 hover:underline focus:outline-none ${
               (!canResend || mutation.isLoading)
                 ? 'text-gray-400 cursor-not-allowed hover:no-underline'

@@ -140,16 +140,34 @@ const ConsumerLayout: React.FC = () => {
     useMatch('/listings/:listingId');
 
   return (
-    <>
-      <GV_TopNav />
-      <GV_SideDrawer />
-      {showBreadcrumb && <GV_Breadcrumb />}
-      <main className="pt-16">
+    <div className="min-h-screen flex flex-col">
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <GV_TopNav />
+        <GV_SideDrawer />
+        {showBreadcrumb && <GV_Breadcrumb />}
+      </header>
+      <main className="flex-1 pt-16">
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>
       </main>
-    </>
+      <footer className="bg-gray-800 text-gray-200 py-8 mt-auto">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-4 md:mb-0 text-center md:text-left">
+            <h3 className="text-lg font-semibold">MarketMate</h3>
+            <p className="text-sm">
+              © {new Date().getFullYear()} MarketMate. All rights reserved.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <Link to="/terms" className="hover:underline">Terms &amp; Conditions</Link>
+            <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
+            <Link to="/help" className="hover:underline">Help</Link>
+            <Link to="/contact" className="hover:underline">Contact</Link>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 };
 
